@@ -1,0 +1,11 @@
+---
+- name: Install Glance on CentOS
+  hosts: compute
+  become: yes
+  tasks:
+
+    - name: Install required Glance packages
+      yum:
+        name:
+          - glances
+        state: present

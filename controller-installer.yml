@@ -1,0 +1,21 @@
+---
+- name: Install and configure Keystone
+  hosts: controller
+  become: true
+  tasks:
+    - name: Install Keystone packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - keystone
+        - python3-openstackclient
+        - apache2
+        - libapache2-mod-php
+        - php
+
+  handlers:
+    - name: Restart Keystone
+      service:
+        name: keystone
+        state: restarted

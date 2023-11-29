@@ -1,0 +1,25 @@
+---
+- name: Install Nova on Ubuntu
+  hosts: etc
+  become: yes
+  tasks:
+  
+  - name: Install Nova packages
+    apt:
+      name:
+        - nova-api
+        - nova-conductor
+        - nova-novncproxy
+        - nova-scheduler
+        - nova-compute
+      state: present
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Install Nova packages
+    yum:
+      name:
+        - nova-agent
+        - libnova
+        - libnova-devel
+      state: present
+    when: ansible_distribution == "CentOS"
